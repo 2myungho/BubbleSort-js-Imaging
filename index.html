@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{padding:0;margin:0;}
+        a{text-decoration:none;}
+        ul,ol{list-style: none;}
+
+        #wrap{
+            width:64.8%;
+            margin:150px auto 0;
+            border:1px solid #000;
+        }
+        ul{overflow: hidden; margin-top:10px;}
+        li{
+            float: left; 
+            width:50px;
+            height:50px;
+            background:#d9d9d9;
+            margin:0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="wrap">
+        <input id="input" type="txet" maxlength="3" />
+        <input type="submit" value=" 확인" id="submit">
+        <p id="text">0</p>
+        <ul id =textForm>
+        </ul>
+    </form>
+
+    <script>
+        var input = document.getElementById("input")
+
+        var text = document.getElementById("text");
+        const submit = document.getElementById("submit");
+
+        var array = [];
+        
+        //submit
+        submit.addEventListener('click', function(e){
+            e.preventDefault()
+            texts()
+        });
+
+        //text
+        input.addEventListener('change', updateText);
+        function updateText(e){
+          text.textContent = e.target.value
+        }
+
+        
+        //li 생성
+        function texts(e){
+            var textForm = document.getElementById("textForm");
+            var li = document.createElement("li");
+            var value = input.value
+            // var children = textForm.children.length + 1 // class +1
+            if(value === "") value = "0";  //빈 값일 경우 0을 반환
+            
+            li.setAttribute("class", "text"); //li에 test 클래스 생성
+            li.appendChild(document.createTextNode(value)); //input value
+
+            array.push(String(value)) //배열 생성
+            console.log(array)
+
+            input.value = ""; //input.velue 초기화
+            textForm.appendChild(li) //li  생성
+            
+            
+            if(value>100) {
+                alert("100이상의 수는 입력할 수 없습니다."); // 100초과 수 제한
+                array.pop();
+                textForm.removeChild(textForm.lastChild)
+            }
+        }
+        
+        
+        
+    </script>
+</body>
+</html>
