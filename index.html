@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Bubble sort</title>
+    <script type="text/javascript" src="main.js"></script>
     <style>
       * {
         padding: 0;
@@ -35,6 +36,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transition: all 0.5s ease-in-out;
       }
     </style>
   </head>
@@ -51,102 +53,5 @@
       <p id="text">0</p>
       <ul id="textForm"></ul>
     </form>
-
-    <script>
-      var input = document.getElementById("input");
-      var textForm = document.getElementById("textForm");
-
-      var text = document.getElementById("text"); //preview
-      const submit = document.getElementById("submit");
-      const sort_btn = document.getElementById("sort");
-
-      var array = []; //빈 배열 생성
-
-      //sort
-      sort_btn.addEventListener("click", sort);
-      function sort() {
-        // array.some((item) => {
-        //   for (var i = 0; i < array.length; i++) {
-        //     console.log("------");
-        //     if (array[i] > array[i + 1]) {
-        //       console.log(
-        //         " 앞 글자가 더 큽니다." + array[i] + " : " + array[i + 1]
-        //       );
-
-        //       array.splice(items, 0, items + 1); //추가위치, 삭제항목수
-        //       var li = document.createElement("li"); //새로운 li
-        //       var items = document.createTextNode(array[i]); //배열의 값을 items에 저장
-        //       li.appendChild(items); //items를 li에 추가
-        //       textForm.appendChild(li); //li를 ul에 추가
-        //       li.setAttribute("class", "text"); //li에 test 클래스 생성
-        //       console.log(array);
-        //     } else {
-        //       console.log("정상입니다." + array[i] + " : " + array[i + 1]);
-        //     }
-        //   }
-        // });
-
-        for(var i = 0; i<array.length; i++){
-            console.log("------")
-            if(array[i] > array[i+1]){
-                console.log(" 앞 글자가 더 큽니다." + array[i] + " : " + array[i+1])
-
-                array.splice(items,0,items+1)//추가위치, 삭제항목수
-                var li = document.createElement("li"); //새로운 li
-                var items = document.createTextNode(array[i]); //배열의 값을 items에 저장
-                li.appendChild(items) //items를 li에 추가
-                textForm.appendChild(li) //li를 ul에 추가
-                li.setAttribute("class", "text"); //li에 test 클래스 생성
-                console.log(array)
-
-            }else{
-                console.log("정상입니다." + array[i] + " : " + array[i+1])
-            }
-        }
-      }
-
-      //submit
-      submit.addEventListener("click", function (e) {
-        e.preventDefault();
-        texts();
-      });
-
-      //text
-      input.addEventListener("change", updateText);
-      function updateText(e) {
-        text.textContent = e.target.value;
-      }
-
-      //li 생성
-      function texts(e) {
-        var value = input.value;
-        array.push(Number(value)); //배열 생성
-        var last_item = array.slice(-1).pop();
-        console.log(last_item);
-        // array.filter((item, index) => array.indexOf(item) !== index)
-
-        array.some((item, index, array) => {
-          var li = document.createElement("li"); //새로운 li
-          console.log(item);
-          if (item === last_item) {
-            var items = document.createTextNode(item); //배열의 값을 items에 저장
-            li.appendChild(items); //items를 li에 추가
-            textForm.appendChild(li); //li를 ul에 추가
-            li.setAttribute("class", "text"); //li에 test 클래스 생성
-            return item === last_item;
-          }
-        });
-
-        // var children = textForm.children.length + 1 // class +1
-        if (value === "") value = 0; //빈 값일 경우 0을 반환
-        console.log(array);
-        input.value = ""; //input.velue 초기화
-        if (value > 100) {
-          alert("100이상의 수는 입력할 수 없습니다."); // 100초과 수 제한
-          array.pop();
-          textForm.removeChild(textForm.lastChild);
-        }
-      }
-    </script>
   </body>
 </html>
