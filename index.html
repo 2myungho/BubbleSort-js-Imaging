@@ -1,89 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        *{padding:0;margin:0;}
-        a{text-decoration:none;}
-        ul,ol{list-style: none;}
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      ul,
+      ol {
+        list-style: none;
+      }
 
-        #wrap{
-            width:64.8%;
-            margin:150px auto 0;
-            border:1px solid #000;
-        }
-        ul{overflow: hidden; margin-top:10px;}
-        li{
-            float: left; 
-            width:50px;
-            height:50px;
-            background:#d9d9d9;
-            margin:0 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      #wrap {
+        width: 64.8%;
+        margin: 150px auto 0;
+        border: 1px solid #000;
+      }
+      ul {
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      li {
+        float: left;
+        width: 50px;
+        height: 50px;
+        background: #d9d9d9;
+        margin: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <form id="wrap">
-        <input id="input" type="txet" maxlength="3" />
-        <input type="submit" value=" 확인" id="submit">
-        <p id="text">0</p>
-        <ul id =textForm>
-        </ul>
+      <input
+        id="input"
+        type="txet"
+        maxlength="3"
+        onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+      />
+      <input type="submit" value=" 확인" id="submit" />
+      <input type="button" value=" 정렬" id="sort" />
+      <p id="text">0</p>
+      <ul id="textForm"></ul>
     </form>
 
     <script>
-        var input = document.getElementById("input")
+      var input = document.getElementById("input");
+      var textForm = document.getElementById("textForm");
 
-        var text = document.getElementById("text");
-        const submit = document.getElementById("submit");
+      var text = document.getElementById("text"); //preview
+      const submit = document.getElementById("submit");
+      const sort_btn = document.getElementById("sort");
 
-        var array = [];
-        
-        //submit
-        submit.addEventListener('click', function(e){
-            e.preventDefault()
-            texts()
-        });
+      var array = []; //빈 배열 생성
 
-        //text
-        input.addEventListener('change', updateText);
-        function updateText(e){
-          text.textContent = e.target.value
-        }
+      //sort
+      sort_btn.addEventListener("click", sort);
+      function sort() {
+        // array.some((item) => {
+        //   for (var i = 0; i < array.length; i++) {
+        //     console.log("------");
+        //     if (array[i] > array[i + 1]) {
+        //       console.log(
+        //         " 앞 글자가 더 큽니다." + array[i] + " : " + array[i + 1]
+        //       );
 
-        
-        //li 생성
-        function texts(e){
-            var textForm = document.getElementById("textForm");
-            var li = document.createElement("li");
-            var value = input.value
-            // var children = textForm.children.length + 1 // class +1
-            if(value === "") value = "0";  //빈 값일 경우 0을 반환
-            
-            li.setAttribute("class", "text"); //li에 test 클래스 생성
-            li.appendChild(document.createTextNode(value)); //input value
+        //       array.splice(items, 0, items + 1); //추가위치, 삭제항목수
+        //       var li = document.createElement("li"); //새로운 li
+        //       var items = document.createTextNode(array[i]); //배열의 값을 items에 저장
+        //       li.appendChild(items); //items를 li에 추가
+        //       textForm.appendChild(li); //li를 ul에 추가
+        //       li.setAttribute("class", "text"); //li에 test 클래스 생성
+        //       console.log(array);
+        //     } else {
+        //       console.log("정상입니다." + array[i] + " : " + array[i + 1]);
+        //     }
+        //   }
+        // });
 
-            array.push(String(value)) //배열 생성
-            console.log(array)
+        for(var i = 0; i<array.length; i++){
+            console.log("------")
+            if(array[i] > array[i+1]){
+                console.log(" 앞 글자가 더 큽니다." + array[i] + " : " + array[i+1])
 
-            input.value = ""; //input.velue 초기화
-            textForm.appendChild(li) //li  생성
-            
-            
-            if(value>100) {
-                alert("100이상의 수는 입력할 수 없습니다."); // 100초과 수 제한
-                array.pop();
-                textForm.removeChild(textForm.lastChild)
+                array.splice(items,0,items+1)//추가위치, 삭제항목수
+                var li = document.createElement("li"); //새로운 li
+                var items = document.createTextNode(array[i]); //배열의 값을 items에 저장
+                li.appendChild(items) //items를 li에 추가
+                textForm.appendChild(li) //li를 ul에 추가
+                li.setAttribute("class", "text"); //li에 test 클래스 생성
+                console.log(array)
+
+            }else{
+                console.log("정상입니다." + array[i] + " : " + array[i+1])
             }
         }
-        
-        
-        
+      }
+
+      //submit
+      submit.addEventListener("click", function (e) {
+        e.preventDefault();
+        texts();
+      });
+
+      //text
+      input.addEventListener("change", updateText);
+      function updateText(e) {
+        text.textContent = e.target.value;
+      }
+
+      //li 생성
+      function texts(e) {
+        var value = input.value;
+        array.push(Number(value)); //배열 생성
+        var last_item = array.slice(-1).pop();
+        console.log(last_item);
+        // array.filter((item, index) => array.indexOf(item) !== index)
+
+        array.some((item, index, array) => {
+          var li = document.createElement("li"); //새로운 li
+          console.log(item);
+          if (item === last_item) {
+            var items = document.createTextNode(item); //배열의 값을 items에 저장
+            li.appendChild(items); //items를 li에 추가
+            textForm.appendChild(li); //li를 ul에 추가
+            li.setAttribute("class", "text"); //li에 test 클래스 생성
+            return item === last_item;
+          }
+        });
+
+        // var children = textForm.children.length + 1 // class +1
+        if (value === "") value = 0; //빈 값일 경우 0을 반환
+        console.log(array);
+        input.value = ""; //input.velue 초기화
+        if (value > 100) {
+          alert("100이상의 수는 입력할 수 없습니다."); // 100초과 수 제한
+          array.pop();
+          textForm.removeChild(textForm.lastChild);
+        }
+      }
     </script>
-</body>
+  </body>
 </html>
