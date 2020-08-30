@@ -5,54 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bubble sort</title>
     <script type="text/javascript" src="main.js"></script>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      a {
-        text-decoration: none;
-      }
-      ul,
-      ol {
-        list-style: none;
-      }
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="index.css">
 
-      #wrap {
-        width: 64.8%;
-        margin: 150px auto 0;
-        border: 1px solid #000;
-      }
-      ul {
-        overflow: hidden;
-        margin-top: 10px;
-      }
-      li {
-        float: left;
-        width: 50px;
-        height: 50px;
-        background: #d9d9d9;
-        margin: 0 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: all 0.5s ease-in-out;
-      }
-    </style>
   </head>
   <body>
-    <form id="wrap">
-      <input
-        id="input"
-        type="txet"
-        maxlength="3"
-        onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"
-      />
-      <input type="submit" value=" 확인" id="submit" />
-      <input type="button" value=" 정렬" id="sort" />
-      <input type="button" value=" random 10개 생성" id="random" />
-      <p id="text">0</p>
-      <ul id="textForm"></ul>
-    </form>
+    <div id="wrap">
+      <h1>Bubble Sort</h1>
+      <form id="form_wrap">
+        <div id ="input_form">
+          <input
+          id="input"
+          type="txet"
+          maxlength="3"
+          onKeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+        /> </br>
+        <button type="submit" id="submit" class="btn btn-danger">Save</button>
+        <button type="button" id="sort" class="btn btn-danger">Auto Sort</button>
+        <button type="button" id="random" class="btn btn-danger">Generate 10 random numbers</button>
+
+        <p id="text">0</p>
+        
+        </div>
+        
+        <ul id="textForm"></ul>
+      </form>
+
+    </div>
   </body>
 </html>
