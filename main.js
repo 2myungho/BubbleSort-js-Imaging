@@ -12,7 +12,7 @@ window.onload = function () {
     random_btn.addEventListener("click", random);
     function random(){
         array.length = 0; //배열 초기화
-        
+    
         console.log(textForm.children.length)
         
         for(let i = 0; i<10; i++){
