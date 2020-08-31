@@ -6,13 +6,24 @@ window.onload = function () {
     const submit = document.getElementById("submit");
     const sort_btn = document.getElementById("sort");
     const random_btn = document.getElementById("random");
+    const remove_btn = document.getElementById("remove");
 
     const array = []; //빈 배열 생성
+
+    remove_btn.addEventListener("click", remove);
+    function remove(){
+        array.length = 0; //배열 초기화
+        for(let i = 0; i<10; i++){
+            if(textForm.children.length>0){
+                textForm.removeChild(textForm.children[0]);
+            }
+        }
+    }
 
     random_btn.addEventListener("click", random);
     function random(){
         array.length = 0; //배열 초기화
-        
+    
         console.log(textForm.children.length)
         
         for(let i = 0; i<10; i++){
@@ -41,7 +52,7 @@ window.onload = function () {
         let save;
         for (let j = 0; j < array.length; j++) {
             if (array[j] > array[j + 1]) {
-                const items = document.getElementsByTagName("li");
+                const items = document.getElementsByTagName("li")
                 items[j].style.backgroundColor = `rgba(255,${j * 15},${j * 15},1)`
                 save = array[j] //save에 값 저장
                 array[j] = array[j + 1] //값 교환
